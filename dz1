@@ -1,138 +1,200 @@
 #include <iostream>
-#include <ctime>
+#include <Windows.h>
+
 using namespace std;
 
-int main()
+
+template <class T> 
+void  sortirovka(T A[], int size)
+
 {
-	int summNegativeValue = 0, productBetweenMinMax, productEvenElements, summBetweenMinMax;
 
-	const int SIZE = 10;
+    int p;
 
-	int arr[SIZE];
+     STUDENT x;
 
-	srand(time(NULL));
+    for (int j = 0; j < size; j++)
+    {
+        p = j;
+        x = A[j];
+        for (int k = j + 1; k < size; k++)
+        {
+            int s = 0; 
+            if (A[k].name[s] == x.name[s])
+                s++;
+            if (A[k].name[s] < x.name[s])
+            {
+                p = k;
+                x = A[k];
+            }
+        }
+        A[p] = A[j];
+        A[j] = x;
+    }
 
-	for (int i = 0; i < SIZE; i++) //  наполнение массива случайными числами
-	{
-		arr[i] = rand() % 50 - 25;
-	}
 
-										//////  Сумму отрицательных элементов.  //////
-	cout << endl; cout << "\t| ";
+}
 
-	for (int i = 0; i < SIZE; i++)
-	{
-		cout << arr[i] << " | "; // вывод массива
+struct STUDENT
+{
+    char name[100];
+    int group;
 
-		if (arr[i] < 0)
-		{
-			summNegativeValue += arr[i];
-		}
-	}
+    union zachet
+    {
+        unsigned int rez : 1;
+    }rezult;
 
-	cout << endl; cout << endl;
-	cout << "The sum of negative elements is equal to: " << summNegativeValue << endl; cout << endl;
-	
-							//////  Произведение элементов, находящихся между min и max элементами. //////
-	int minArr = arr[0]; 
-	int maxArr = arr[0]; 
-	int minElem = 0, maxElem = 0;
+} student;
 
-	for (int i = 0; i < SIZE; i++) // Нахождение минимального и максимального значения
-	{
-		if (minArr > arr[i])
-		{
-			minArr = arr[i];
-			minElem = i;
-		}
-		if (maxArr < arr[i]) 
-		{
-			maxArr = arr[i];
-			maxElem = i;
-		}
-	}
-					 
-	int begin, end;
+void main()
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
 
-	if (minElem < maxElem) // определение позиции минимального и максимального элемента
-	{
-		begin = minElem;
-		end = maxElem;
-	}
-	else
-	{
-		begin = maxElem;
-		end = minElem;
-	}
+    int vibor;
+    STUDENT ar[20];
 
-	if (begin == end + 1) // нахождение произведения между между min и max элементами если таковые имеются.
-	{
-		cout << "There are no values between elements!" << endl;
-	}
-	else
-	{
-		productBetweenMinMax = arr[begin + 1];
 
-		for (int i = begin + 2; i < end; i++)
-		{
-			productBetweenMinMax *= arr[i];
-		}
+    int i = 0;
 
-		cout << "The product of elements between min and max elements is equal to: " << productBetweenMinMax << endl; cout << endl;
-	}
 
-									//////  Произведение элементов с четными номерами. //////
+    cout << "Программа учета сдачи зачетов студентами" << endl;
 
-	productEvenElements = arr[0];
+    do
+    {
+        cout << "\n\nВведите фамилию студента" << endl;
 
-	for (int i = 0; i < SIZE; i += 2)
-	{
-		productEvenElements *= arr[i];	
-	}
+        fflush(stdin);
+        cin.getline(student.name, sizeof(student.name));
 
-	cout << "The product of elements with even numbers is equal to: " << productEvenElements << endl; cout << endl;
-	
-							////// Сумму элементов, находящихся между первым и последним отрицательными элементами. //////
+        cout << "Введите номер группы" << endl;
+        cin >> student.group;
 
-	int beginNegative;
-	int endNegative;
-	int summNegative;
+        int rez;
+        cout << "0 - незачет, 1 - зачет" << endl;
+        do
+            cin >> rez;
+        while (rez < 0 || rez>1);
 
-	for (int i = 0; i < SIZE; i++) // Нахождение первого отрицательного элемента
-	{
-		if (arr[i] < 0)
-		{
-			beginNegative = i;
-			break;
-		}
-	}
+        student.rezult.rez = rez;
 
-	for (int i = SIZE - 1; i >= 0; i--) // Нахождение ппоследнего отрицательного элемента
-	{
-		if (arr[i] < 0)
-		{
-			endNegative = i;
-			break;
-		}
-	}
+        cout << "\n\nПродолжить заполнение ведомости? 0 - нет, 1 - да" << endl;
 
-	if (beginNegative + 1 == endNegative) // Сумма элементов, находящихся между первым и последним отрицательными 
-	{
-		cout << "There are no values between elements!" << endl;
-	}
-	else
-	{
-		summNegative = arr[beginNegative + 1];
+        do
+            cin >> vibor;
+        while (vibor < 0 || vibor>1);
 
-		for (int i = beginNegative + 2; i < endNegative; i++)
-		{
-			summNegative += arr[i];
-		}
-	}
-	
-	cout << "The sum of the elements between the first and last negative it is equal to: " << summNegative << endl;
+        ar[i] = student;
+        i++;
 
-	cout << endl;
-	system("pause");
-	return 0;
+    } while (vibor == 1);
+
+
+    do
+    {
+        cout << "0 - список сдавших зачет" << endl;
+        cout << "1 - список должников" << endl;
+        int vibor_1;
+
+        do
+            cin >> vibor_1;
+        while (vibor_1 < 0 || vibor_1>1);
+
+        if (vibor_1 == 0)
+        {
+            cout << "\n\nКак отсортировать? 0 - по группам, 1 - по алфавиту" << endl;
+            int vibor_2;
+
+            do
+                cin >> vibor_2;
+            while (vibor_2 < 0 || vibor_2>1);
+
+            if (vibor_2 == 0)
+            {
+                cout << "\n\nВведите номер группы" << endl;
+                int number;
+                cin >> number;
+                int count = 0;
+
+                for (int j = 0; j < i; j++)
+                {
+                    if (ar[j].group == number && ar[j].rezult.rez == 1)
+                    {
+                        cout << "\n\nФамилия: " << ar[j].name << endl;
+                        cout << "Номер группы: " << ar[j].group << endl;
+                        count++;
+                    }
+                }
+
+                cout << "\n\nКоличество студентов группы №  " << number << " сдавших зачет: " << count << endl;
+            }
+
+            else
+            {
+                sortirovka(ar, i);
+                for (int j = 0; j < i; j++)
+                {
+                    if (ar[j].rezult.rez == 1)
+                    {
+                        cout << "\n\nФамилия: " << ar[j].name << endl;
+                        cout << "Номер группы: " << ar[j].group << endl;
+                    }
+                }
+            }
+
+        }
+
+        if (vibor_1 == 1)
+        {
+            cout << "\n\nКак отсортировать? 0 - по группам, 1 - по алфавиту" << endl;
+            int vibor_2;
+
+            do
+                cin >> vibor_2;
+            while (vibor_2 < 0 || vibor_2>1);
+
+            if (vibor_2 == 0)
+            {
+                cout << "\n\nВведите номер группы" << endl;
+                int number;
+                cin >> number;
+                int count = 0;
+
+                for (int j = 0; j < i; j++)
+                {
+                    if (ar[j].group == number && ar[j].rezult.rez == 0)
+                    {
+                        cout << "\n\nФамилия: " << ar[j].name << endl;
+                        cout << "Номер группы: " << ar[j].group << endl;
+                        count++;
+                    }
+                }
+
+                cout << "\n\nКоличество студентов группы №  " << number << " не сдавших зачет: " << count << endl;
+            }
+
+            else
+            {
+                sortirovka(ar, i);
+                for (int j = 0; j < i; j++)
+                {
+                    if (ar[j].rezult.rez == 0)
+                    {
+                        cout << "\n\nФамилия: " << ar[j].name << endl;
+                        cout << "Номер группы: " << ar[j].group << endl;
+                    }
+
+                }
+            }
+
+
+        }
+        cout << "\n\nВывести другой список? 0 - нет, 1 - да " << endl;
+        do
+            cin >> vibor;
+        while (vibor < 0 || vibor>1);
+
+    } while (vibor == 1);
+
 }
