@@ -58,8 +58,7 @@ public:
 };
 
 void dlist::accept()
-{
-    setlocale(LC_ALL, "Russian");
+{ 
     char number[50];
     char domnumber[40];
     char name[30];
