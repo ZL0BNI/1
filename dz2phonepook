@@ -73,10 +73,10 @@ void dlist::accept()
         cin >> number;
         while (strlen(number) >= 15)
         {
-            cout << "Не правельный номер  :";
+            cout << "Не правельный номер :";
             cin >> number;
         }
-        cout << "Введи домашний    :";
+        cout << "Введи домашний :";
         cin >> domnumber;
         temp = new dnode(name, number, domnumber);
         if (head == NULL)
@@ -93,7 +93,7 @@ void dlist::accept()
             ptr->next = temp;
             temp->prev = ptr;
         }
-        cout << "Хочешь продолжить? y/n";
+        cout << "Хочешь продолжить? y/n\n";
         cin >> ans;
     } while (ans == 'y');
 
@@ -255,7 +255,6 @@ void dlist::searchbyname(char na[10])
             cout << "\n\nИмя  ::\t" << ptr->name;
             cout << "\nНомер::\t" << ptr->number;
             cout << "\nДомашний::\t" << ptr->domnumber;
-
         }
         ptr = ptr->next;
     }
@@ -307,7 +306,7 @@ void dlist::update(char n[20])
 
             do
             {
-                cout << "\nХотите изменить?\n1.Имя\n2.Номер\n3.Домашний\n";
+                cout << "\nХочеш изменить?\n1.Имя\n2.Номер\n3.Домашний\n";
                 cin >> c;
                 switch (c)
                 {
@@ -329,7 +328,7 @@ void dlist::update(char n[20])
                     cin >> ptr->domnumber;
                     break;
                 }
-                cout << "Хотите продолжить?";
+                cout << "Хочеш продолжить?\n";
                 cin >> ans;
             } while (ans == 'y');
         }
@@ -357,7 +356,7 @@ int main()
     cout << "\n\nКак тебя зовут?\n";
     cin.getline(name, 20);
     cout << "\n\n!!!!!!!!!!!!!!!!!!!!!!!   Привет " << name << "   !!!!!!!!!!!!!!!!!!!!!";
-    cout << "\n\n\nСделаем телефонную книгу " << name << "  \n\n";
+    cout << "\n\n\nСделаем телефонную книгу \n";
     d1.accept();
     d1.sort();
     do
@@ -377,13 +376,13 @@ int main()
             break;
         case 3:
 
-            cout << "\n\nВведи имя человека, детали о котором ты хочешь обновить...\n";
+            cout << "\n\nВведи имя человека, детали о котором ты хочеш обновить...\n";
             cin >> n;
             d1.update(n);
             d1.sort();
             break;
         case 4:
-            cout << "\nВведи имя, которое ты хочешь удалить\n";
+            cout << "\nВведи имя, которое ты хочеш удалить\n";
             cin >> name;
             d1.deletecontact(name);
             break;
@@ -408,18 +407,18 @@ int main()
                     d1.searchbyname(name);
                     break;
                 case 2:
-                    cout << "Введи искомое имя\n";
+                    cout << "Введи искомый номер имя\n";
                     cin >> number;
                     d1.searchbynumber(number);
                     break;
                 case 3:
-                    cout << "Введи искомое имя\n";
+                    cout << "Введи домашний имя\n";
                     cin >> domnumber;
                     d1.searchbydomnumber(domnumber);
                     break;
-                default:cout << "\nВвода не существует.....\n";
+                default:cout << "\nВвода не существует.....\n\n";
                 }
-                cout << "Хотите продолжить поиск? y/n";
+                cout << "Хочеш продолжить поиск? y/n\n";
                 cin >> ans;
             } while (ans == 'y');
 
@@ -429,7 +428,7 @@ int main()
             break;
         default:cout << "\nВвода не существует..\n";
         }
-        cout << "\n\nХотите продолжить? y/n";
+        cout << "\n\nХочеш продолжить? y/n\n";
         cin >> ans;
     } while (ans == 'y');
     SetConsoleCP(i1);
