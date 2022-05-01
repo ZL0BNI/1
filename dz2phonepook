@@ -5,7 +5,7 @@ using namespace std;
 
 class dnode
 {
-  
+
 public:
     char number[50];
     char domnumber[40];
@@ -41,8 +41,8 @@ public:
     void searchbynumber(char no[30]);
     void searchbydomnumber(char g[20]);
 
-   
- 
+
+
     void accept();
     void display();
     void update(char ch[15]);
@@ -68,7 +68,6 @@ void dlist::accept()
     {
         cout << "Введи имя :";
         cin >> name;
-        // cin.getline (name,30);
         cout << "Введи номер  :";
         cin >> number;
         while (strlen(number) >= 15)
@@ -100,8 +99,8 @@ void dlist::accept()
 }
 void dlist::display()
 {
-    ptr = head;//start the node
-    while (ptr != NULL)//traverse till last
+    ptr = head;
+    while (ptr != NULL)
     {
         cout << "\n\nИмя  ::\t" << ptr->name;
         cout << "\nНомер::\t" << ptr->number;
@@ -286,9 +285,8 @@ void dlist::searchbydomnumber(char gm[20])
             cout << "Домашний найден\n" << endl;
             cout << "Контактная информация:\n" << endl;
             cout << "\n\nИмя  ::\t" << ptr->name;
-            cout << "\nНомер::\t+-" << ptr->number;
+            cout << "\nНомер::\t+" << ptr->number;
             cout << "\nДомашний::\t" << ptr->domnumber;
-
         }
         ptr = ptr->next;
     }
@@ -311,7 +309,7 @@ void dlist::update(char n[20])
                 switch (c)
                 {
                 case 1:
-                    cout << "Введите новое-Имя=";
+                    cout << "Введите новое Имя";
                     cin >> ptr->name;
                     break;
                 case 2:
@@ -412,13 +410,13 @@ int main()
                     d1.searchbynumber(number);
                     break;
                 case 3:
-                    cout << "Введи домашний имя\n";
+                    cout << "Введи домашний \n";
                     cin >> domnumber;
                     d1.searchbydomnumber(domnumber);
                     break;
                 default:cout << "\nВвода не существует.....\n\n";
                 }
-                cout << "Хочеш продолжить поиск? y/n\n";
+                cout << "Хочеш продолжить поиск? y/n\n\n";
                 cin >> ans;
             } while (ans == 'y');
 
